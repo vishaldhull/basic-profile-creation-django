@@ -1,0 +1,27 @@
+{% extends "accounts/base.html" %}
+{% block content %}
+    <div class="content-section">
+      	<div class="media">
+        	<div class="media-body">
+        		<legend class="border-bottom mb-4">Profile To Be Deleted</legend>
+          		<h2 class="account-heading">{{ user.username }}</h2>
+          		<p class="text-secondary">{{ user.email }}</p>
+        	</div>
+      	</div>
+    </div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card card-body">
+				<p>Are you sure you want to delete "{{user.username|capfirst}}"?</p>
+				
+				{# Below form will send the user pk to views and user will be deleted. #}
+				<form action="{% url 'delete_user' user.id  %}" method="POST">
+					{% csrf_token %}
+					<a class="btn btn-warning" href="{% url 'profile' %}">Cancel</a>
+
+					<input class="btn btn-danger" type="submit" name="Confirm">
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "accounts/base.html" %}
+{% block content %} 
+  <div class="content-section">
+    <div class="media">
+      <div class="media-body">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+
+  <legend class="border-bottom mb-4">Remove Profiles from here.</legend>
+  <form action="{% url 'get_user' %}">
+    <div class="card card-body">
+      <table class="table table-sm">
+        <tr>
+          <th>Select Username</th>
+          <th>Remove Selected</th>
+        </tr>
+        <tr>
+          <td>
+              <select name="select_user"> 
+                {# This select_user will provide the selected user id to the next delete page. #}
+                <option disabled="true" selected>--Select User--</option>
+                {% for user in all_users %}
+                <option id="{{user.id}}" value="{{user.id}}">{{user.username|capfirst}}</option>
+                {% endfor %}
+              </select>
+          </td>
+          <td>
+              <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+{% endblock content %} 
